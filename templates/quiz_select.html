@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson Select</title>
+  <style>
+    /* Styles for the navigation bars */
+    @import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+
+    .navbar-main {
+      background-color: #DA542A;
+      width: 100%;
+      height: 115px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 0 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 999;
+      font-family: 'Itim', cursive;
+    }
+
+    .navbar-text {
+      color: #FDEFD5;
+      font-size: 18px;
+      cursor: pointer;
+      text-decoration: none;
+      margin-right: 20px;
+    }
+
+    .navbar-secondary {
+      background: rgba(253, 239, 213, 0.65);
+      width: 263px;
+      padding: 38px 0px 289px 0px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 11px;
+      position: fixed;
+      top: 115px;
+      left: 0;
+      font-family: 'Itim', cursive;
+      z-index: 998;
+    }
+
+    .navbar-secondary-logo {
+      width: 150px;
+      height: auto;
+      margin-bottom: 20px;
+    }
+
+    .navbar-secondary-divider {
+      width: 100%;
+      height: 1px;
+      background-color: #FBD848;
+      margin-bottom: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    .navbar-secondary-divider:hover {
+      background-color: #DA542A;
+    }
+
+    .navbar-secondary-text {
+      color: #2D69A8;
+      font-size: 18px;
+      cursor: pointer;
+      text-decoration: none;
+      margin-left: 20px;
+      transition: background-color 0.3s ease;
+      padding: 5px 10px;
+    }
+
+    .navbar-secondary-text:hover {
+      background-color: #DA542A;
+      color: #FDEFD5;
+    }
+
+    /* Rest of your CSS styles for lesson_select page */
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 150px;
+    }
+
+    .heading {
+      color: #2D69A8;
+      font-family: 'Itim', cursive;
+      font-size: 40px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 130%;
+      margin-bottom: 20px;
+    }
+
+    .example-text {
+      color: #2D69A8;
+      font-family: 'Itim', cursive;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 130%;
+    }
+
+    .center-buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 10px;
+      justify-content: center;
+      align-items: center;
+      margin-left: 263px;
+    }
+
+    .center-buttons button {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: var(--background, rgba(236, 236, 236, 0.65));
+      box-shadow: 0px 4px 4px 0px rgba(180, 172, 172, 0.20);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-right: 40px;
+      color: #FDEFD5;
+      font-size: 18px;
+      border: none;
+      overflow: hidden;
+    }
+
+    .center-buttons button:hover {
+      background-color: #FDEFD5;
+      color: #DA542A;
+    }
+
+    .center-buttons button img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .center-buttons button span {
+      margin-top: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        margin-top: 230px; /* ปรับเพิ่ม margin-top ให้เหมาะสมกับ secondary nav bar ในหน้าจอขนาดเล็ก */
+        flex-direction: column-reverse; /* สลับเรียงลำดับของ .container ให้เป็นแนวตั้งเมื่อหน้าจอเล็ก */
+      }
+
+      .center-buttons {
+        display: flex; /* แสดง .center-buttons เป็น Flexbox */
+        flex-wrap: wrap; /* กำหนดให้รายการอยู่ใน .center-buttons ขึ้นบรรจุแบบ Wrap */
+        justify-content: flex-end; /* จัดตำแหน่งข้อมูลที่อยู่ใน .center-buttons ไปทางด้านขวา */
+        max-width: 768px; /* กำหนดความกว้างสูงสุดของ .center-buttons ในหน้าจอขนาดเล็ก */
+      }
+
+      .center-buttons button {
+        margin: 10px; /* กำหนดระยะห่างระหว่างปุ่ม */
+        pointer-events: none; /* ปิดการกระทำต่างๆ ที่เกิดขึ้นในพื้นที่ของ .center-buttons */
+      }
+    }
+
+  </style>
+  <script>
+    function navigateToQuiz(lesson) {
+      window.location.href = `/question/${lesson}`;
+    }
+  </script>
+</head>
+<body>
+  <div class="navbar-main">
+    <a href="about_us" class="navbar-text">เกี่ยวกับเรา</a>
+    <a href="contact_page" class="navbar-text">ติดต่อ/แจ้งปัญหา</a>
+  </div>
+
+  <div class="navbar-secondary">
+    <img src="/static/pic/logo.png" alt="Logo" class="navbar-secondary-logo">
+    <div class="navbar-secondary-divider"></div>
+    <a href="student_dashboard" class="navbar-secondary-text">หน้าแรก</a>
+  </div>
+
+  <div class="container">
+    <div class="center-buttons">
+      <button onclick="navigateToQuiz(1)">
+        <img src="static/pic/elephant.png" alt="Button 1">
+        <span>บทที่ 1</span>
+      </button>
+      <button onclick="navigateToQuiz(2)">
+        <img src="static/pic/quiz.png" alt="Button 2">
+        <span>บทที่ 2</span>
+      </button>
+      <button onclick="navigateToQuiz(3)">
+        <img src="static/pic/button3.jpg" alt="Button 3">
+        <span>บทที่ 3</span>
+      </button>
+      <button onclick="navigateToQuiz(4)">
+        <img src="static/pic/button4.jpg" alt="Button 4">
+        <span>บทที่ 4</span>
+      </button>
+      <button onclick="navigateToQuiz(5)">
+        <img src="static/pic/button5.jpg" alt="Button 5">
+        <span>บทที่ 5</span>
+      </button>
+      <button onclick="navigateToQuiz(6)">
+        <img src="static/pic/button6.jpg" alt="Button 6">
+        <span>บทที่ 6</span>
+      </button>
+      <button onclick="navigateToQuiz(7)">
+        <img src="static/pic/button7.jpg" alt="Button 7">
+        <span>บทที่ 7</span>
+      </button>
+      <button onclick="navigateToQuiz(8)">
+        <img src="static/pic/button8.jpg" alt="Button 8">
+        <span>บทที่ 8</span>
+      </button>
+      <button onclick="navigateToQuiz(9)">
+        <img src="static/pic/button9.jpg" alt="Button 9">
+        <span>บทที่ 9</span>
+      </button>
+      <button onclick="navigateToQuiz(10)">
+        <img src="static/pic/button10.jpg" alt="Button 10">
+        <span>บทที่ 10</span>
+      </button>
+      <button onclick="navigateToQuiz(11)">
+        <img src="static/pic/button11.jpg" alt="Button 11">
+        <span>บทที่ 11</span>
+      </button>
+      <button onclick="navigateToQuiz(12)">
+        <img src="static/pic/button12.jpg" alt="Button 12">
+        <span>บทที่ 12</span>
+      </button>
+    </div>
+  </div>
+
+
+</body>
+</html>

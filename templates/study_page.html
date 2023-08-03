@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Next Page</title>
+  <style>
+    /* Styles for the navigation bars */
+    @import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+
+    .navbar-main {
+      background-color: #DA542A;
+      width: 100%;
+      height: 115px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 0 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 999;
+      font-family: 'Itim', cursive;
+    }
+
+    .navbar-text {
+      color: #FDEFD5;
+      font-size: 18px;
+      cursor: pointer;
+      text-decoration: none;
+      margin-right: 20px;
+    }
+
+    .navbar-secondary {
+      background: rgba(253, 239, 213, 0.65);
+      width: 263px;
+      padding: 38px 0px 289px 0px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 11px;
+      position: fixed;
+      top: 115px;
+      left: 0;
+      font-family: 'Itim', cursive;
+      z-index: 998;
+    }
+
+    .navbar-secondary-logo {
+      width: 150px;
+      height: auto;
+      margin-bottom: 20px;
+    }
+
+    .navbar-secondary-divider {
+      width: 100%;
+      height: 1px;
+      background-color: #FBD848;
+      margin-bottom: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    .navbar-secondary-divider:hover {
+      background-color: #DA542A;
+    }
+
+    .navbar-secondary-text {
+      color: #2D69A8;
+      font-size: 18px;
+      cursor: pointer;
+      text-decoration: none;
+      margin-left: 20px;
+      transition: background-color 0.3s ease;
+      padding: 5px 10px;
+    }
+
+    .navbar-secondary-text:hover {
+      background-color: #DA542A;
+      color: #FDEFD5;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="navbar-main">
+    <a href="about_us" class="navbar-text">เกี่ยวกับเรา</a>
+    <a href="contact_page" class="navbar-text">ติดต่อ/แจ้งปัญหา</a>
+  </div>
+
+  <div class="navbar-secondary">
+    <img src="/static/pic/logo.png" alt="Logo" class="navbar-secondary-logo">
+    <div class="navbar-secondary-divider"></div>
+    <a href="#" class="navbar-secondary-text">บทที่ 1</a>
+    <a href="#" class="navbar-secondary-text">บทที่ 2</a>
+    <a href="#" class="navbar-secondary-text">บทที่ 3</a>
+  </div>
+
+  <!-- Rest of your HTML content for the next page -->
+
+</body>
+</html>

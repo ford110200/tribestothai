@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add User</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <style>
+        .framebox {
+            border-radius: 50px;
+            background: rgba(253, 239, 213, 0.85);
+            padding: 20px;
+        }
+
+        .popup {
+            border-radius: 8px;
+            border: 1px solid var(--stroke-light, #DEE2E6);
+            background: var(--gray-white, #FFF);
+            box-shadow: 0px 20px 20px 0px rgba(0, 0, 0, 0.08), 0px 0px 2px 0px rgba(0, 0, 0, 0.12);
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="framebox">
+                    <h1>สร้างรหัสผ่าน</h1>
+                    <form method="POST" action="/add_user">
+                        <div class="form-group">
+                            <label for="username">ชื่อผู้ใช้:</label>
+                            <input type="text" id="username" name="username" class="form-control {% if is_username_taken %}is-invalid{% endif %}" required>
+                            {% if is_username_taken %}
+                            <div class="invalid-feedback">
+                                ชื่อผู้ใช้นี้ถูกใช้ไปแล้ว โปรดใช้ชื่อผู้ใช้อื่น
+                            </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">รหัสผ่าน:</label>
+                            <input type="password" id="password" name="password" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">ชื่อ:</label>
+                            <input type="text" id="name" name="name" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="surname">นามสกุล:</label>
+                            <input type="text" id="surname" name="surname" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="age">อายุ:</label>
+                            <input type="number" id="age" name="age" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="role">คุณคือ:</label>
+                            <select id="role" name="role" class="form-control" required>
+                                <option value="นักเรียน">นักเรียน</option>
+                                <option value="ครู">ครู</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Add User</button>
+                    </form>
+                    {% if is_user_added %}
+                    <div class="alert alert-success mt-3" role="alert">
+                        สร้างรหัสผ่านเสร็จสิ้น
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <h3>สมัครสมาชิกสำเร็จ</h3>
+            <p>ข้อมูลผู้ใช้ถูกเพิ่มลงในฐานข้อมูลแล้ว</p>
+            <button onclick="closePopup()">ปิด</button>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script>
+
+    </script>
+</body>
+</html>

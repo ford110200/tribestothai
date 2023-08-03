@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+
+
+    /* Styles for the navigation bars */
+    .navbar-main {
+      background-color: #DA542A;
+      width: 100%;
+      height: 115px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 0 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 999;
+    }
+
+    .navbar-text {
+      color: #FDEFD5;
+      font-size: 18px;
+      cursor: pointer;
+      text-decoration: none;
+      margin-right: 20px;
+      font-family: 'Itim', cursive;
+    }
+
+    .navbar-secondary {
+      background: rgba(253, 239, 213, 0.65);
+      width: 263px;
+      padding: 38px 0px 289px 0px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 11px;
+      position: fixed;
+      top: 115px;
+      left: 0;
+    }
+
+    .navbar-secondary-logo {
+      width: 150px;
+      height: auto;
+      margin-bottom: 20px;
+    }
+
+    .navbar-secondary-divider {
+      width: 100%;
+      height: 1px;
+      background-color: #FBD848;
+      margin-bottom: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    .navbar-secondary-divider:hover {
+      background-color: #DA542A;
+    }
+
+    .navbar-secondary-text {
+      color: #2D69A8;
+      font-size: 18px;
+      cursor: pointer;
+      text-decoration: none;
+      margin-left: 20px;
+      font-family: 'Itim', cursive;
+      transition: background-color 0.3s ease;
+      padding: 5px 10px;
+    }
+
+    .navbar-secondary-text:hover {
+      background-color: #DA542A;
+      color: #FDEFD5;
+    }
+
+    /* Styles for the content */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      margin-top: 115px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .heading {
+      color: #2D69A8;
+      font-family: 'Itim', cursive;
+      font-size: 40px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 130%; /* 52px */
+      margin-bottom: 20px;
+    }
+
+    .example-text {
+      color: #2D69A8;
+      font-family: 'Itim', cursive;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 130%; /* 31.2px */
+    }
+
+    .bottom-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 40px;
+    }
+
+    .bottom-section-button {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: var(--background, rgba(236, 236, 236, 0.65));
+      box-shadow: 0px 4px 4px 0px rgba(180, 172, 172, 0.20);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-right: 40px;
+    }
+
+    .bottom-section-button:hover {
+      background-color: #DA542A;
+    }
+
+    .bottom-section-button:focus {
+      outline: none;
+    }
+
+    .bottom-section-button-label {
+      color: #2D69A8;
+      font-family: 'Itim', cursive;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 130%; /* 31.2px */
+      margin-bottom: 10px;
+      margin-top: 10px;
+    }
+
+    .bottom-section-description {
+      color: #2D69A8;
+      font-family: 'Itim', cursive;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 130%; /* 31.2px */
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    /* Media Queries */
+    @media screen and (max-width: 767px) {
+      .navbar-secondary {
+        width: 100%;
+        padding: 38px 0px 20px 0px;
+      }
+
+      .navbar-secondary-text {
+        padding: 5px;
+      }
+    }
+
+    @media screen and (min-width: 768px) and (max-width: 1023px) {
+      .navbar-secondary {
+        width: 180px;
+        padding: 38px 0px 20px 0px;
+      }
+    }
+
+    @media screen and (min-width: 1024px) {
+      .navbar-secondary {
+        width: 263px;
+        padding: 38px 0px 289px 0px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar-main">
+    <a href="about_us" class="navbar-text">เกี่ยวกับเรา</a>
+    <a href="contact_page" class="navbar-text">ติดต่อ/แจ้งปัญหา</a>
+    <a href="logout" class="navbar-text">ออกจากระบบ</a>
+
+  </div>
+
+
+
+  <div class="container">
+    <h2 class="heading">คำแนะนำ</h2>
+    <a href="#" class="example-text">คลิกเพื่อดูวิธีการใช้งาน</a>
+    <div class="bottom-section">
+      <button class="bottom-section-button" onclick="location.href='lesson_select'">
+        <img src="/static/pic/book.png" alt="Book" style="width: 150px; height: 150px;">
+        <p class="bottom-section-button-label">
+          <span class="clickable-text" onclick="toggleColor(event)">บทเรียน</span>
+        </p>
+      </button>
+      <button class="bottom-section-button" onclick="location.href='quiz_select'">
+        <img src="/static/pic/quiz.png" alt="Quiz" style="width: 150px; height: 150px;">
+        <p class="bottom-section-button-label">
+          <span class="clickable-text" onclick="toggleColor(event)">แบบทดสอบ</span>
+        </p>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    function toggleColor(event) {
+      const clickableText = event.target;
+      clickableText.style.backgroundColor = '#DA542A';
+      clickableText.style.color = '#FDEFD5';
+    }
+  </script>
+</body>
+
+
+</html>

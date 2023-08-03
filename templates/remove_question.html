@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Remove Question</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Remove a Question</h1>
+    <form method="POST" action="{{ url_for('remove_question') }}">
+        <select name="question_to_remove">
+            {% for question in questions %}
+                <option value="{{ loop.index }}">{{ question['question'] }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Remove">
+    </form>
+    <a href="{{ url_for('menu') }}">Back</a>
+</body>
+</html>

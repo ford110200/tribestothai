@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Students</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .navbar-main {
+            background-color: #DA542A;
+            width: 100%;
+            height: 115px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 0 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 999;
+            font-family: 'Itim', cursive;
+        }
+
+        .navbar-text {
+            color: #FDEFD5;
+            font-size: 18px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+
+        .container {
+            margin-top: 150px;
+        }
+
+        .student-card {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .student-card img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            max-height: 200px;
+            border-radius: 5px 5px 0 0;
+        }
+
+        .student-card .card-body {
+            padding: 15px;
+        }
+
+        .student-card .card-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #DA542A;
+            font-weight: bold;
+        }
+
+        .student-card .card-text {
+            color: #555;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .student-card .card-footer {
+            text-align: right;
+            background-color: #F7F7F7;
+            padding: 10px;
+            border-top: 1px solid #ddd;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .student-card .btn-danger {
+            background-color: #DA542A;
+            color: #FDEFD5;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .student-card .btn-danger:hover {
+            background-color: #FDEFD5;
+            color: #DA542A;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar-main">
+        <a href="about_us" class="navbar-text">เกี่ยวกับเรา</a>
+        <a href="contact_page" class="navbar-text">ติดต่อ/แจ้งปัญหา</a>
+    </div>
+
+    <div class="container">
+        <h1 class="mt-4">All Students</h1>
+        <div class="row">
+            {% if students %}
+            {% for student in students %}
+            <div class="col-md-4 student-card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ student.name }} {{ student.surname }}</h5>
+                    <p class="card-text">Age: {{ student.age }}</p>
+                    <p class="card-text">Username: {{ student.username }}</p>
+                </div>
+                <div class="card-footer text-right">
+                    <form action="/remove_student/{{ student.id }}" method="post">
+                        <input type="hidden" name="_method" value="POST">
+                        <button type="submit" class="btn btn-danger">Remove</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p>No students found.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

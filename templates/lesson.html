@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson</title>
+    <!-- Add the Bootstrap CSS link here -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Additional styles for the lesson page */
+        @import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+
+        .navbar-main {
+            background-color: #DA542A;
+            width: 100%;
+            height: 115px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 0 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 999;
+            font-family: 'Itim', cursive;
+            overflow-x: auto;
+        }
+        .navbar-button {
+            padding: 8px 16px;
+            background-color: #2D69A8;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-right: 10px;
+            text-decoration: none;
+        }
+
+
+        .navbar-text {
+            color: #FDEFD5;
+            font-size: 18px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+
+        body {
+            background-color: #f4f4f4;
+            font-family: 'Itim', cursive;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+          display: flex;
+          flex-direction: column; /* เพิ่มส่วนนี้เพื่อให้เนื้อหาแสดงแยกตามแนวตั้ง */
+          align-items: flex-start; /* เนื่องจากคุณต้องการให้ lesson boxes แสดงแยกตามแนวตั้ง */
+
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 20px;
+          margin-top: 115px; /* Add top margin to accommodate the navbar */
+          justify-content: center; /* Center lesson boxes horizontally */
+          align-items: center; /* Center lesson boxes vertically */
+        }
+
+
+        .heading {
+            color: #2D69A8;
+            font-size: 40px;
+            font-weight: 400;
+            line-height: 130%;
+            margin-bottom: 20px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .lesson-box {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border-radius: 20px;
+          background: #fdefd5;
+          padding: 20px;
+          margin: 10px;
+          width: 100%;
+          max-width: 1000px; /* Adjust the width as desired */
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          position: relative; /* Add position relative to allow absolute positioning of audio buttons */
+          flex: 1; /* เพิ่มส่วนนี้เพื่อให้เนื้อหาขยับแยกข้างกันได้ */
+        }
+
+        .lesson-content {
+          color: #2D69A8;
+          font-size: 18px;
+          font-weight: 400;
+          line-height: 130%;
+          margin-bottom: 20px;
+          text-align: center;
+          flex: 1; /* เพิ่มส่วนนี้เพื่อให้เนื้อหาขยับแยกข้างกันได้ */
+          margin-left: 20px; /* กำหนดระยะห่างระหว่างภาพและเนื้อหา */
+        }
+
+
+        .lesson-image {
+            flex:0 0 30%
+            width: 100%;
+            max-height: 400px; /* Adjust the max-height as desired */
+            object-fit: contain; /* Scale the image down without cropping */
+            border-radius: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .audio-wrapper {
+            display: flex;
+            justify-content: center; /* Align audio buttons to the center */
+            align-items: center;
+            flex-wrap: wrap; /* Allow audio buttons to wrap to the next line */
+            gap: 10px;
+            margin-bottom: 20px;
+            position: absolute;
+            bottom: 10px; /* Adjust the bottom position as desired */
+            left: 50%;
+            transform: translateX(-50%); /* Center the audio buttons horizontally */
+        }
+
+        .audio-wrapper audio {
+            width: 100px;
+        }
+
+        /* Custom "Next" button style */
+        .next-button {
+            cursor: pointer;
+            padding: 10px 20px;
+            background-color: #2D69A8;
+            color: #FFFFFF;
+            border-radius: 10px;
+            margin: 20px auto;
+            display: block;
+        }
+
+        /* Custom "Back" button style */
+        .back-button {
+            cursor: pointer;
+            padding: 10px 20px;
+            background-color: #DA542A;
+            color: #FFFFFF;
+            border-radius: 10px;
+            margin: 20px auto;
+            display: block;
+        }
+
+        /* Hide all lesson-box elements by default */
+        .lesson-box {
+            display: none;
+        }
+        .button-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* Show the first lesson-box element by default */
+        .lesson-box:first-child {
+            display: block;
+        }
+
+        .audio-buttons-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-left:50px;
+
+        }
+
+        .audio-buttons-container audio {
+            width: 250px; /* ปรับความกว้างของปุ่มเล่นเสียง */
+            height: 40px; /* ปรับความสูงของปุ่มเล่นเสียง */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar-main">
+        {% for lesson in lesson_data %}
+        <button class="navbar-button" onclick="showLesson({{ lesson[0] }})">{{ lesson[1] }}</button>
+        {% endfor %}
+
+    </div>
+    <div class="button-wrapper">
+        <button onclick="startOver()">เริ่มเรียนใหม่</button>
+        <a href="{{ url_for('lesson_select') }}" class="btn btn-primary">กลับไปหน้าเลือกบทเรียน</a>
+    </div>
+
+    <div class="container">
+        {% for lesson in lesson_data %}
+        <div class="lesson-box" data-lesson-id="{{ lesson[0] }}">
+            <div class="d-flex flex-column align-items-center">
+                <h1 class="heading">{{ lesson[1] }}</h1>
+
+                <div class="lesson-content">
+                    <div class="d-flex flex-row align-items-center">
+                        <div class="lesson-image-wrapper">
+                            <img class="lesson-image img-fluid" src="{{ url_for('static', filename=lesson[2]) }}" alt="Lesson Image">
+                        </div>
+                        <div class="audio-buttons-container" data-lesson-id="{{ lesson[0] }}">
+                            {% set words = ['ไทย', 'ม้งขาว', 'ม้งเขียว', 'ลาหู่', 'ลีซอ', 'อาข่า', 'กะเหรี่ยง'] %}
+                            {% for i in range(3, 10) %}
+                            <div class="audio-button-wrapper">
+                                <div class="audio-text">{{ words[i-3] }}</div>
+                                <audio controls>
+                                    <source src="{{ url_for('static', filename=lesson[i]) }}" type="audio/mpeg">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+
+
+
+
+
+
+    <!-- Add the Bootstrap JS and Popper.js scripts here -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.4/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        // JavaScript code for handling "Next" and "Back" button functionality
+        const lessonBoxes = document.querySelectorAll('.lesson-box');
+        let currentLessonIndex = 0;
+
+        function showNextLesson() {
+            lessonBoxes[currentLessonIndex].style.display = 'none';
+            currentLessonIndex = (currentLessonIndex + 1) % lessonBoxes.length;
+            lessonBoxes[currentLessonIndex].style.display = 'block';
+            updateButtons();
+        }
+
+        function showPreviousLesson() {
+            lessonBoxes[currentLessonIndex].style.display = 'none';
+            currentLessonIndex = (currentLessonIndex - 1 + lessonBoxes.length) % lessonBoxes.length;
+            lessonBoxes[currentLessonIndex].style.display = 'block';
+            updateButtons();
+        }
+
+        function updateButtons() {
+            const nextButton = document.querySelector('.next-button');
+            const backButton = document.querySelector('.back-button');
+            const buttonWrapper = document.querySelector('.button-wrapper');
+            if (currentLessonIndex === lessonBoxes.length - 1) {
+                nextButton.textContent = 'เรียนเสร็จสิ้น';
+                buttonWrapper.style.display = 'block';
+            } else {
+                nextButton.textContent = 'ถัดไป';
+                buttonWrapper.style.display = 'none';
+            }
+
+            // Update the active class for the navbar text
+            const navbarTextElements = document.querySelectorAll('.navbar-text');
+            navbarTextElements.forEach((element) => {
+                element.classList.remove('active');
+            });
+            navbarTextElements[currentLessonIndex].classList.add('active');
+        }
+
+        // Function to show specific lesson based on lesson ID
+        function showLesson(lessonId) {
+            for (let i = 0; i < lessonBoxes.length; i++) {
+                if (lessonBoxes[i].dataset.lessonId === lessonId.toString()) {
+                    lessonBoxes[currentLessonIndex].style.display = 'none';
+                    currentLessonIndex = i;
+                    lessonBoxes[currentLessonIndex].style.display = 'block';
+                    updateButtons();
+                    break;
+                }
+            }
+        }
+
+        // ปุ่มเริ่มเรียนใหม่
+        function startOver() {
+            lessonBoxes[currentLessonIndex].style.display = 'none';
+            currentLessonIndex = 0;
+            lessonBoxes[currentLessonIndex].style.display = 'block';
+            updateButtons();
+        }
+
+        // Attach click events to the "Next" and "Back" buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttonWrapper = document.createElement('div');
+            buttonWrapper.classList.add('button-wrapper');
+            document.body.appendChild(buttonWrapper);
+
+            const backButton = document.createElement('button');
+            backButton.textContent = 'ย้อนกลับ';
+            backButton.classList.add('back-button');
+            backButton.addEventListener('click', showPreviousLesson);
+            buttonWrapper.appendChild(backButton);
+
+            const nextButton = document.createElement('button');
+            nextButton.textContent = 'ถัดไป';
+            nextButton.classList.add('next-button');
+            nextButton.addEventListener('click', showNextLesson);
+            buttonWrapper.appendChild(nextButton);
+
+            updateButtons();
+        });
+    </script>
+</body>
+</html>

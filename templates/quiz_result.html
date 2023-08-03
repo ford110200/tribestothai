@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Result</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* เพิ่มสไตล์ CSS ตามที่คุณต้องการ */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .result-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            margin-top: 50px;
+        }
+
+        .result-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .result-text {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .result-score {
+            font-size: 36px;
+            font-weight: bold;
+            color: #2D69A8;
+            margin-bottom: 30px;
+        }
+
+        .back-to-quiz-button {
+            cursor: pointer;
+            padding: 10px 20px;
+            background-color: #DA542A;
+            color: #FFFFFF;
+            border-radius: 10px;
+            display: inline-block;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="result-container">
+        <div class="result-title">ผลการทำคำถาม</div>
+        <div class="result-text">คะแนนรวมที่คุณได้คือ</div>
+        <div class="result-score" id="total-score">0</div>
+        <a href="student_dashboard" class="back-to-quiz-button">กลับไปหน้าเลือกบทเรียน</a>
+
+    </div>
+
+    <script>
+        // ในส่วนนี้คือ JavaScript ที่ใช้สำหรับนำคะแนนที่รวมมาแสดงผลในหน้า quiz_result.html
+        document.addEventListener('DOMContentLoaded', function () {
+            const totalScoreElement = document.getElementById('total-score');
+            const scores = JSON.parse(localStorage.getItem('scores')) || [];
+            const totalScore = scores.reduce((total, score) => total + score, 0);
+
+            totalScoreElement.textContent = totalScore;
+            localStorage.removeItem('scores'); // ลบคะแนนที่เก็บไว้ใน localStorage เพื่อไม่ให้คะแนนยังคงค้างอยู่เมื่อกลับไปทำคำถามอีกครั้ง
+        });
+    </script>
+
+</body>
+
+</html>

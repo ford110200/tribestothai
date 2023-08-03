@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+
+        .navbar-main {
+            background-color: #DA542A;
+            width: 100%;
+            height: 115px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 0 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 999;
+            font-family: 'Itim', cursive;
+            overflow-x: auto;
+        }
+
+        .navbar-button {
+            padding: 8px 16px;
+            background-color: #2D69A8;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-right: 10px;
+            text-decoration: none;
+        }
+
+        .navbar-text {
+            color: #FDEFD5;
+            font-size: 18px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+
+        body {
+            background-color: #f4f4f4;
+            font-family: 'Itim', cursive;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            margin-top: 115px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .heading {
+            color: #2D69A8;
+            font-size: 40px;
+            font-weight: 400;
+            line-height: 130%;
+            margin-bottom: 20px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .lesson-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 20px;
+            background: #fdefd5;
+            padding: 20px;
+            margin: 10px;
+            width: 100%;
+            max-width: 1000px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            flex: 1;
+        }
+
+        .lesson-content {
+            color: #2D69A8;
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 130%;
+            margin-bottom: 20px;
+            text-align: center;
+            flex: 1;
+            margin-left: 20px;
+        }
+
+        .lesson-image {
+            flex: 0 0 30%;
+            width: 100%;
+            max-height: 400px;
+            object-fit: contain;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .audio-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .audio-wrapper audio {
+            width: 100px;
+        }
+
+        .next-button {
+            cursor: pointer;
+            padding: 10px 20px;
+            background-color: #2D69A8;
+            color: #FFFFFF;
+            border-radius: 10px;
+            margin: 20px auto;
+            display: block;
+        }
+
+        .back-button {
+            cursor: pointer;
+            padding: 10px 20px;
+            background-color: #DA542A;
+            color: #FFFFFF;
+            border-radius: 10px;
+            margin: 20px auto;
+            display: block;
+        }
+
+        .lesson-box {
+            display: none;
+        }
+
+        .lesson-box:first-child {
+            display: block;
+        }
+
+        .audio-buttons-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-left: 50px;
+        }
+
+        .audio-buttons-container audio {
+            width: 250px;
+            height: 40px;
+        }
+
+        /* เพิ่มความโค้งมนให้ปุ่มบันทึก */
+        .speak-button {
+            border-radius: 50%;
+        }
+
+        /* ปุ่มเริ่มต้นเป็นสีเขียว */
+        .speak-button {
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 10px; /* เพิ่มการโค้งมนให้ปุ่ม */
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-right: 10px;
+            text-decoration: none;
+        }
+
+        .speak-button.recording {
+            background-color: #f44336;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        {% for question in questions %}
+        <div class="lesson-box" data-lesson-id="{{ question.lesson }}">
+            <div class="d-flex flex-column align-items-center">
+                <h1 class="heading">{{ question.question }}</h1>
+                <button class="speak-button">พูด</button>
+                <div class="lesson-content">
+                    <div class="lesson-image-wrapper">
+                        <img class="lesson-image img-fluid" src="{{ url_for('static', filename=question.image) }}"
+                            alt="Lesson Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const questionBoxes = document.querySelectorAll('.lesson-box');
+            let currentQuestionIndex = 0;
+            let totalScore = 0;
+            let scores = [];
+            let recognitionTimeout;
+            let isRecording = false;
+
+            function redirectToQuizResult() {
+                localStorage.setItem('scores', JSON.stringify(scores));
+                setTimeout(function () {
+                    // Redirect to the quiz_result page
+                    window.location.href = '/quiz_result'; // Replace '/quiz_result' with the actual URL of your quiz_result page
+                }, 5000);
+            }
+
+            function showNextQuestion() {
+                questionBoxes[currentQuestionIndex].style.display = 'none';
+                currentQuestionIndex = (currentQuestionIndex + 1) % questionBoxes.length;
+                questionBoxes[currentQuestionIndex].style.display = 'block';
+
+                if (currentQuestionIndex === questionBoxes.length - 1) {
+                    redirectToQuizResult();
+                }
+            }
+
+            function checkAnswer(answer) {
+                const currentQuestion = questionBoxes[currentQuestionIndex];
+                const questionText = currentQuestion.querySelector('.heading').textContent.trim();
+                let isCorrect = 0;
+
+                if (answer.toLowerCase() === questionText.toLowerCase()) {
+                    isCorrect = 1;
+                    currentQuestion.dataset.score = '1';
+                    showResultOnScreen(`คำตอบถูกต้อง! คุณได้รับ 1 คะแนน`);
+                    totalScore += 1;
+                } else {
+                    currentQuestion.dataset.score = '0';
+                    showResultOnScreen(`คำตอบไม่ถูกต้อง`);
+                }
+
+                scores.push(isCorrect);
+
+                if (currentQuestionIndex === questionBoxes.length - 1) {
+                    redirectToQuizResult();
+                } else {
+                    setTimeout(function () {
+                        showNextQuestion();
+                    }, 5000);
+                }
+            }
+
+            function showResultOnScreen(message) {
+                const resultElement = document.createElement('div');
+                resultElement.textContent = message;
+                resultElement.classList.add('result');
+
+                const currentQuestion = questionBoxes[currentQuestionIndex];
+                currentQuestion.appendChild(resultElement);
+
+                setTimeout(function () {
+                    resultElement.remove();
+                }, 5000);
+            }
+
+            function handleSpeakButtonClick() {
+                const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+                recognition.lang = 'th-TH';
+
+                if (!isRecording) {
+                    isRecording = true;
+                    this.classList.add('recording');
+                    recognition.start();
+
+                    recognition.onresult = function (event) {
+                        const transcript = event.results[0][0].transcript;
+                        clearTimeout(recognitionTimeout);
+                        checkAnswer(transcript);
+                    };
+
+                    recognition.onerror = function (event) {
+                        console.error('Speech recognition error:', event.error);
+                    };
+
+                    recognition.onend = function () {
+                        console.log('Speech recognition ended.');
+                        recognitionTimeout = setTimeout(function () {
+                            isRecording = false;
+                            handleRecordingEnd();
+                        }, 5000);
+                    };
+                } else {
+                    handleRecordingEnd();
+                }
+            }
+
+            function handleRecordingEnd() {
+                speakButtons.forEach(button => {
+                    button.classList.remove('recording');
+                });
+                recognition.stop();
+                isRecording = false;
+            }
+
+            const speakButtons = document.querySelectorAll('.speak-button');
+            speakButtons.forEach(button => {
+                button.addEventListener('click', handleSpeakButtonClick);
+            });
+        });
+    </script>
+</body>
+
+</html>

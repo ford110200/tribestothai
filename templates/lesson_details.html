@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson Details</title>
+  <!-- ส่วนเรียกใช้ CSS และ Script ต่างๆ ที่คุณใช้ -->
+</head>
+<body>
+  <h1>{{ lesson_details[0][1] }}</h1>
+  <p>{{ lesson_details[0][2] }}</p>
+  <img src="{{ lesson_details[0][3] }}" alt="Lesson Image">
+  <audio controls>
+    <source src="{{ lesson_details[0][4] }}" type="audio/mpeg">
+  </audio>
+</body>
+</html>

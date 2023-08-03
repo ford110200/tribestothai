@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Lessons</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #F5F7F9;
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ccc;
+        }
+
+        th {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        .image-container {
+            width: 100px;
+            height: 100px;
+            overflow: hidden;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        audio {
+            width: 100%;
+        }
+
+        .btn-remove {
+            padding: 5px 10px;
+            font-size: 14px;
+            background-color: #e74c3c;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-remove:hover {
+            background-color: #c0392b;
+        }
+
+        .btn-menu {
+            display: block;
+            text-align: center;
+            font-size: 16px;
+            color: #333;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+
+    <div class="container">
+        <h1>ดูคำถาม</h1>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>ชื่อบทเรียน</th>
+                    <th>รูปภาพ</th>
+                    <th>บทที่</th> <!-- Label for column 10 -->
+                    <th>การดำเนินการ</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if lessons %}
+                {% for lesson in lessons %}
+                    <tr>
+                        <td>{{ lesson[0] }}</td>
+                        <td>{{ lesson[1] }}</td>
+                        <td>
+                            {% if lesson[2] %}
+                                <div class="image-container">
+                                <img class="lesson-image img-fluid" src="{{ url_for('static', filename=lesson[2]) }}" alt="Lesson Image">
+                                </div>
+                            {% else %}
+                                ไม่มีรูปภาพ
+                            {% endif %}
+                        </td>
+                        <td>{{ lesson[10] }}</td> <!-- Assuming the lesson_id is in the 11th column -->
+                        <td>
+                            <a href="/delete/{{ lesson[0] }}" class="btn btn-remove">ลบ</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="5">ไม่มีบทเรียน</td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+
+        <a href="/teacher_dashboard" class="btn-menu">เมนูหลัก</a>
+    </div>
+
+</body>
+</html>

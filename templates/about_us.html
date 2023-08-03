@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <title>About Us</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+
+        .navbar-main {
+          background-color: #DA542A;
+          width: 100%;
+          height: 115px;
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          padding: 0 20px;
+          position: fixed;
+          top: 0;
+          left: 0;
+          z-index: 999;
+          font-family: 'Itim', cursive;
+        }
+
+        .navbar-text {
+          color: #FDEFD5;
+          font-size: 18px;
+          cursor: pointer;
+          text-decoration: none;
+          margin-right: 20px;
+        }
+        /* Additional styles for the about us page */
+        body {
+            background-color: #f4f4f4;
+            font-family: 'Itim', cursive;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            margin-top: 135px; /* Add top margin to accommodate the navbar */
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #348eda;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            margin-top: 40px; /* Adjust the top margin to move the logo down */
+        }
+
+        .logo {
+            width: 300px;
+            height: auto;
+        }
+
+        .frame-box {
+            width: 1068px;
+            height: 926px;
+            flex-shrink: 0;
+            background-color: rgba(253, 239, 213, 0.85);
+            border-radius: 50px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="navbar-main">
+        <a href="about_us" class="navbar-text">เกี่ยวกับเรา</a>
+        <a href="contact_page" class="navbar-text">ติดต่อ/แจ้งปัญหา</a>
+    </div>
+    <div class="container">
+        <div href="index" class="logo-container">
+            <img src="/static/pic/logo.png" alt="Logo" class="logo">
+        </div>
+
+        <div class="frame-box">
+            <h2>About Us</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sit amet volutpat risus. Donec semper velit a odio condimentum, vel cursus nulla eleifend. Proin faucibus metus a congue suscipit. Vivamus id risus in leo aliquet tincidunt. In eu velit vestibulum, tempor tortor in, dictum lacus. Phasellus sit amet malesuada ex. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut facilisis nulla eu metus mattis, ac vulputate arcu malesuada. Duis sit amet lacus sit amet nibh tempor cursus ut et sem.</p>
+            <p>Phasellus tristique lacus sed lacus suscipit, vitae luctus elit tristique. Etiam ultricies feugiat malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Proin id lectus sed sem aliquam semper id in leo. Morbi aliquet metus id consectetur dapibus. Donec mattis faucibus ipsum, vitae cursus leo dapibus nec. Sed maximus leo non elit aliquet lobortis. Sed porttitor faucibus dictum.</p>
+        </div>
+    </div>
+
+</body>
+</html>
